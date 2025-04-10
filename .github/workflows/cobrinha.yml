@@ -2,9 +2,14 @@ name: Generate Datas
 
 on:
   schedule: # execute every 12 hours
-    - cron: "* */12 * * *"
+    - cron: "0 */12 * * *"
   workflow_dispatch:
-
+  
+permissions:
+  contents: write  # necessário para publicar no branch
+  pages: write
+  id-token: write
+  
 jobs:
   build:
     name: Jobs to update datas
@@ -17,7 +22,7 @@ jobs:
           github_user_name: alexandrefraga
           svg_out_path: dist/github-contribution-grid-snake.svg
 
-      - uses: crazy-max/ghaction-github-pages@v2.1.3
+      - uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: output
           build_dir: dist
